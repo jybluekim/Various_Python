@@ -65,20 +65,29 @@ def num2lcd(num, s):
 
 def print_numstring(instr, s):
 
-    x = ["" for i in range (2*s + 3)]
-    for i in instr:
 
+    # note: 2s+3 is the # of lines that need to be printed
+    x = ["" for i in range (2*s + 3)]
+
+    # for each digit in the in-string
+    for i in instr:
+        # get an "outlist" from the func
         a = num2lcd(i, s)
 
+        # append to the existing list
         for j in range(2*s + 3):
             x[j] = x[j] + " " + a[j]
 
+    # finally dump it out
     for i in range(2*s + 3):
         print (x[i])
 
 
-print_numstring("0123456789", 2)
-print_numstring("0123456789", 10)
+
+if __name__ == "__main__":
+
+    print_numstring("0123456789", 1)
+    print_numstring("0123456789", 4)
 
 
 
