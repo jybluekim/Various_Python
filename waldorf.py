@@ -4,6 +4,19 @@ words = ["luna", "shadow", "alexis", "andrew", "phantom", "forces", "lawn", "dog
 
 #words = ["luna", "shadow", "alexis" ]
 
+def outof_bounds(val, ref, pol):
+    if pol == 0: # val >= ref
+        if val >= ref:
+            return True
+        else:
+            return False
+    else: # val < ref
+        if val < ref:
+            return True
+        else:
+            return False
+
+
 # m is col width
 # n is row count
 n = 8
@@ -44,8 +57,10 @@ for w in words:
         dir = random.randint(0,7)
         #print ("dir: ", dir)
         if dir == 0:
-            endx = x - length
-            if endx < 0:
+#            endx = x - length
+#            if endx < 0:
+#                continue
+            if outof_bounds(x-length, 0, 1) == True:
                 continue
             else:
                 for k in range(length):
@@ -59,8 +74,10 @@ for w in words:
                         list[y][x-k] = w[k]
                     loop = False
         elif dir == 1:
-            endy = y - length
-            if endy < 0:
+            #endy = y - length
+            #if endy < 0:
+            #    continue
+            if outof_bounds(y-length, 0, 1) == True:
                 continue
             else:
                 for k in range(length):
@@ -76,8 +93,10 @@ for w in words:
                     loop = False
 
         elif dir == 2:
-            endx = x + length
-            if endx > m-1:
+            #endx = x + length
+            #if endx > m-1:
+            #    continue
+            if outof_bounds(x+length, m, 0) == True:
                 continue
             else:
                 for k in range(length):
@@ -92,8 +111,10 @@ for w in words:
                         list[y][x + k] = w[k]
                     loop = False
         elif dir == 3:
-            endy = y + length
-            if endy > n-1:
+            ##endy = y + length
+            #if endy > n-1:
+            #    continue
+            if outof_bounds(y+length, n, 0) == True:
                 continue
             else:
                for k in range(length):
@@ -112,7 +133,8 @@ for w in words:
         elif dir == 4:
             endx = x - length
             endy = y - length
-            if endx < 0 or endy < 0:
+            #if endx < 0 or endy < 0:
+            if outof_bounds(endx, 0, 1) or outof_bounds(endy, 0, 1):
                 continue
             else:
                 for k in range(length):
@@ -128,7 +150,8 @@ for w in words:
         elif dir == 5:
             endx = x + length
             endy = y - length
-            if endx > n - 1 or endy < 0:
+            #if endx > n - 1 or endy < 0:
+            if outof_bounds(endx, n, 0) or outof_bounds(endy, 0, 1):
                 continue
             else:
                 for k in range(length):
@@ -144,7 +167,8 @@ for w in words:
         elif dir == 6:
             endx = x + length
             endy = y + length
-            if endx > m - 1 or endy > n - 1:
+            #if endx > m - 1 or endy > n - 1:
+            if outof_bounds(endx, m, 0) or outof_bounds(endy, n, 0):
                 continue
             else:
                 for k in range(length):
@@ -160,7 +184,8 @@ for w in words:
         elif dir == 7:
             endx = x - length
             endy = y + length
-            if endx < 0 or endy >  n - 1:
+            #if endx < 0 or endy >  n - 1:
+            if outof_bounds(endx, 0, 1) or outof_bounds(endy, n, 0):
                 continue
             else:
                 for k in range(length):
@@ -182,8 +207,8 @@ for i in range(n):
     a = "".join(list[i])
     print (a)
 print ("")
-for w in words:
-    print (w)
+#for w in words:
+#    print (w)
 #for i in words:
 #    print (i)
 
