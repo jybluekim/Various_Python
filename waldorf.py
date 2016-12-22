@@ -2,7 +2,31 @@ import random
 
 #words = ["luna", "shadow", "alexis", "andrew", "phantom", "forces", "lawn", "dog", "cat" ]
 
-words = ["luna", "shadow", "alexis" ]
+NUM_WORDS = 10
+# m is col width
+# n is row count
+n = 8
+m = 10
+
+list = []
+
+
+
+words = []
+dict = { }
+with open("make_you_feel_my_love.txt", 'r') as file:
+    for l in file:
+        tl = l.split()
+        for t in tl:
+            if len(t) >= 4 and t.isalpha() and len(t) <= n and len(t) <= m:
+               dict[t.lower()] = 1
+
+print ("# words: ", len(dict.keys()))
+print (dict.keys())
+
+words = random.sample(dict.keys(), NUM_WORDS)
+print (words)
+#words = ["luna", "shadow", "alexis" ]
 
 def outof_bounds(val, ref, pol):
     if pol == 0: # val >= ref
@@ -52,17 +76,15 @@ def fill_word(w, x, y, xdir, ydir):
         list[ynext][xnext] = w[k]
 
 
-# m is col width
-# n is row count
-n = 8
-m = 10
 
-list = []
 
 # initialize list
 for i in range(n):
     l = [ "-" for j in range(m)]
     list.append(l)
+
+
+dir_counter = [0 for i in range(8)]
 
 # populate the list
 
@@ -91,6 +113,8 @@ for w in words:
         # 4 is nw, 5 is ne, 6 is se, 7 is sw
         dir = random.randint(0,7)
         #print ("dir: ", dir)
+
+        dir_counter[dir] += 1
         if dir == 0:
             if outof_bounds(x-length, 0, 1):
                 continue
@@ -172,8 +196,9 @@ for w in words:
 # print the contents
 #for i in range(n):
 #    print (list[i])
-    print ("Word: ", w, ", Attempts: ", count)
+    #print ("Word: ", w, ", Attempts: ", count)
 
+print ("Dir counter: ", dir_counter)
 
 for i in range(n):
     a = "".join(list[i])
