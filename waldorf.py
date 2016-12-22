@@ -35,6 +35,23 @@ def is_path_clear(word, x, y, xdir, ydir):
             return False
     return True
 
+def fill_word(w, x, y, xdir, ydir):
+    for k in range(len(w)):
+        xnext, ynext = x, y
+        if xdir == 1:  # increase
+            xnext = x + k
+        elif xdir == -1:  # decrease
+            xnext = x - k
+        if ydir == 1:  # increase
+            ynext = y + k
+        elif ydir == -1:  # decrease
+            ynext = y - k
+
+        nextl = list[ynext][xnext]
+
+        list[ynext][xnext] = w[k]
+
+
 # m is col width
 # n is row count
 n = 8
@@ -75,61 +92,46 @@ for w in words:
         dir = random.randint(0,7)
         #print ("dir: ", dir)
         if dir == 0:
-            if outof_bounds(x-length, 0, 1) == True:
+            if outof_bounds(x-length, 0, 1):
                 continue
             else:
 
-                clean = is_path_clear(w, x, y, -1, 0)
-                if clean:
-                    for k in range(length):
-                        list[y][x-k] = w[k]
+                if is_path_clear(w, x, y, -1, 0):
+                    fill_word(w, x, y, -1, 0)
                     loop = False
+
         elif dir == 1:
-            if outof_bounds(y-length, 0, 1) == True:
+            if outof_bounds(y-length, 0, 1):
                 continue
             else:
-                clean = is_path_clear(w, x, y, 0, -1)
-
-                if clean:
-                    for k in range(length):
-                        list[y-k][x] = w[k]
+                if is_path_clear(w, x, y, 0, -1):
+                    fill_word(w, x, y, 0, -1)
                     loop = False
 
         elif dir == 2:
-            if outof_bounds(x+length, m, 0) == True:
+            if outof_bounds(x+length, m, 0):
                 continue
             else:
-                clean = is_path_clear(w, x, y, 1, 0)
-
-                if clean:
-                    for k in range(length):
-                        list[y][x + k] = w[k]
+                if is_path_clear(w, x, y, 1, 0):
+                    fill_word(w, x, y, 1, 0)
                     loop = False
         elif dir == 3:
-            if outof_bounds(y+length, n, 0) == True:
+            if outof_bounds(y+length, n, 0):
                 continue
             else:
-               clean = is_path_clear(w, x, y, 0, 1)
-
-               if clean:
-                    for k in range(length):
-                        list[y + k][x] = w[k]
-                    loop = False
+               if is_path_clear(w, x, y, 0, 1):
+                   fill_word(w, x, y, 0, 1)
+                   loop = False
 
         # nw
         elif dir == 4:
             endx = x - length
             endy = y - length
-            #if endx < 0 or endy < 0:
             if outof_bounds(endx, 0, 1) or outof_bounds(endy, 0, 1):
                 continue
             else:
-
-                clean = is_path_clear(w, x, y, -1, -1)
-
-                if clean:
-                    for k in range(length):
-                        list[y - k][x - k] = w[k]
+                if is_path_clear(w, x, y, -1, -1):
+                    fill_word(w, x, y, -1, -1)
                     loop = False
 
         # ne
@@ -140,26 +142,19 @@ for w in words:
             if outof_bounds(endx, n, 0) or outof_bounds(endy, 0, 1):
                 continue
             else:
-                clean = is_path_clear(w, x, y, 1, -1)
-
-                if clean:
-                    for k in range(length):
-                        list[y - k][x + k] = w[k]
+                if is_path_clear(w, x, y, 1, -1):
+                    fill_word(w, x, y, 1, -1)
                     loop = False
 
         # se
         elif dir == 6:
             endx = x + length
             endy = y + length
-            #if endx > m - 1 or endy > n - 1:
             if outof_bounds(endx, m, 0) or outof_bounds(endy, n, 0):
                 continue
             else:
-                clean = is_path_clear(w, x, y, 1, 1)
-
-                if clean:
-                    for k in range(length):
-                        list[y + k][x + k] = w[k]
+                if is_path_clear(w, x, y, 1, 1):
+                    fill_word(w, x, y, 1, 1)
                     loop = False
 
         # sw
@@ -170,10 +165,8 @@ for w in words:
             if outof_bounds(endx, 0, 1) or outof_bounds(endy, n, 0):
                 continue
             else:
-                clean = is_path_clear(w, x, y, -1, 1)
-                if clean:
-                    for k in range(length):
-                        list[y + k][x - k] = w[k]
+                if is_path_clear(w, x, y, -1, 1):
+                    fill_word(w, x, y, -1, 1)
                     loop = False
 
 # print the contents
