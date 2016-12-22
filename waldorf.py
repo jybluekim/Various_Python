@@ -54,15 +54,7 @@ def outof_bounds(val, ref, pol):
 
 def is_path_clear(word, x, y, xdir, ydir):
     for k in range(len(word)):
-        xnext, ynext = x, y
-        if xdir == 1: # increase
-            xnext = x + k
-        elif xdir == -1: # decrease
-            xnext = x - k
-        if ydir == 1: # increase
-            ynext = y + k
-        elif ydir == -1: # decrease
-            ynext = y - k
+        xnext, ynext = x + k*xdir, y + k*ydir
 
         nextl = list[ynext][xnext]
         # print ("Next: ", nextl)
@@ -72,15 +64,7 @@ def is_path_clear(word, x, y, xdir, ydir):
 
 def fill_word(w, x, y, xdir, ydir):
     for k in range(len(w)):
-        xnext, ynext = x, y
-        if xdir == 1:  # increase
-            xnext = x + k
-        elif xdir == -1:  # decrease
-            xnext = x - k
-        if ydir == 1:  # increase
-            ynext = y + k
-        elif ydir == -1:  # decrease
-            ynext = y - k
+        xnext, ynext = x + k*xdir, y + k*ydir
 
         nextl = list[ynext][xnext]
 
@@ -215,8 +199,8 @@ for i in range(n):
     a = "".join(list[i])
     print (a)
 print ("")
-#for w in words:
-#    print (w)
+for w in words:
+    print (w)
 #for i in words:
 #    print (i)
 
