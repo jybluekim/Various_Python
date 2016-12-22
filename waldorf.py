@@ -1,6 +1,6 @@
 import random
 
-words = ["luna", "shadow", "alexis", "andrew", "phantom", "forces", "lawn" ]
+words = ["luna", "shadow", "alexis", "andrew", "phantom", "forces", "lawn", "dog", "cat" ]
 
 #words = ["luna", "shadow", "alexis" ]
 
@@ -11,7 +11,7 @@ m = 10
 
 list = []
 
-# initalized list
+# initialize list
 for i in range(n):
     l = [ "-" for j in range(m)]
     list.append(l)
@@ -31,6 +31,8 @@ for w in words:
 
     while loop:
 
+
+        # we are picking a random starting point, then direction for each iteration
         x = random.randint(0, m - 1)
         y = random.randint(0, n - 1)
         count += 1
@@ -179,7 +181,9 @@ for w in words:
 for i in range(n):
     a = "".join(list[i])
     print (a)
-
+print ("")
+for w in words:
+    print (w)
 #for i in words:
 #    print (i)
 
