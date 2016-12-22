@@ -2,7 +2,10 @@ import random
 
 #words = ["luna", "shadow", "alexis", "andrew", "phantom", "forces", "lawn", "dog", "cat" ]
 
-NUM_WORDS = 10
+NUM_WORDS = 8
+MIN_WORD_SIZE = 5
+MAX_WORD_SIZE = 7
+
 # m is col width
 # n is row count
 n = 8
@@ -14,11 +17,19 @@ list = []
 
 words = []
 dict = { }
-with open("make_you_feel_my_love.txt", 'r') as file:
+#with open("make_you_feel_my_love.txt", 'r') as file:
+with open("hunger_games.txt", 'r') as file:
+
     for l in file:
         tl = l.split()
+
+
         for t in tl:
-            if len(t) >= 4 and t.isalpha() and len(t) <= n and len(t) <= m:
+            t.replace('.', '')
+            t.replace(',', '')
+            t.replace('"', '')
+
+            if len(t) >= MIN_WORD_SIZE and len(t) <= MAX_WORD_SIZE and t.isalpha() and len(t) <= n and len(t) <= m:
                dict[t.lower()] = 1
 
 print ("# words: ", len(dict.keys()))
@@ -89,7 +100,7 @@ dir_counter = [0 for i in range(8)]
 # populate the list
 
 for w in words:
-
+    print ("Working on word: ", w)
     #for i in range(n):
      #   print(list[i])
 
