@@ -1,8 +1,8 @@
 import random
 
-words = ["luna", "shadow", "alexis", "andrew", "phantom", "forces", "lawn", "dog", "cat" ]
+#words = ["luna", "shadow", "alexis", "andrew", "phantom", "forces", "lawn", "dog", "cat" ]
 
-#words = ["luna", "shadow", "alexis" ]
+words = ["luna", "shadow", "alexis" ]
 
 def outof_bounds(val, ref, pol):
     if pol == 0: # val >= ref
@@ -17,9 +17,19 @@ def outof_bounds(val, ref, pol):
             return False
 
 
-def is_path_clear(word, x, y, dir):
+def is_path_clear(word, x, y, xdir, ydir):
     for k in range(len(word)):
-        nextl = list[y][x - k]
+        xnext, ynext = x, y
+        if xdir == 1: # increase
+            xnext = x + k
+        elif xdir == -1: # decrease
+            xnext = x - k
+        if ydir == 1: # increase
+            ynext = y + k
+        elif ydir == -1: # decrease
+            ynext = y - k
+
+        nextl = list[ynext][xnext]
         # print ("Next: ", nextl)
         if nextl != '-' and nextl != w[k]:
             return False
@@ -69,12 +79,7 @@ for w in words:
                 continue
             else:
 
-                for k in range(length):
-                    nextl = list[y][x-k]
-                    #print ("Next: ", nextl)
-                    if nextl != '-' and nextl != w[k]:
-                        #print ("Conflict")
-                        clean = False
+                clean = is_path_clear(w, x, y, -1, 0)
                 if clean:
                     for k in range(length):
                         list[y][x-k] = w[k]
@@ -83,50 +88,29 @@ for w in words:
             if outof_bounds(y-length, 0, 1) == True:
                 continue
             else:
-                for k in range(length):
-                    nextl = list[y-k][x]
-                    #print ("Next: ", nextl)
+                clean = is_path_clear(w, x, y, 0, -1)
 
-                    if nextl != '-' and nextl != w[k]:
-                        #print("Conflict")
-                        clean = False
                 if clean:
                     for k in range(length):
                         list[y-k][x] = w[k]
                     loop = False
 
         elif dir == 2:
-            #endx = x + length
-            #if endx > m-1:
-            #    continue
             if outof_bounds(x+length, m, 0) == True:
                 continue
             else:
-                for k in range(length):
-                    nextl = list[y][x+k]
-                    #print ("Next: ", nextl)
+                clean = is_path_clear(w, x, y, 1, 0)
 
-                    if nextl != '-' and nextl != w[k]:
-                        #print("Conflict")
-                        clean = False
                 if clean:
                     for k in range(length):
                         list[y][x + k] = w[k]
                     loop = False
         elif dir == 3:
-            ##endy = y + length
-            #if endy > n-1:
-            #    continue
             if outof_bounds(y+length, n, 0) == True:
                 continue
             else:
-               for k in range(length):
-                   nextl = list[y+k][x]
-                   #print("Next: ", nextl)
+               clean = is_path_clear(w, x, y, 0, 1)
 
-                   if nextl != '-' and nextl != w[k]:
-                        #print("Conflict")
-                        clean = False
                if clean:
                     for k in range(length):
                         list[y + k][x] = w[k]
@@ -140,10 +124,9 @@ for w in words:
             if outof_bounds(endx, 0, 1) or outof_bounds(endy, 0, 1):
                 continue
             else:
-                for k in range(length):
-                    nextl = list[y - k][x - k]
-                    if nextl != '-' and nextl != w[k]:
-                        clean = False
+
+                clean = is_path_clear(w, x, y, -1, -1)
+
                 if clean:
                     for k in range(length):
                         list[y - k][x - k] = w[k]
@@ -157,10 +140,8 @@ for w in words:
             if outof_bounds(endx, n, 0) or outof_bounds(endy, 0, 1):
                 continue
             else:
-                for k in range(length):
-                    nextl = list[y - k][x + k]
-                    if nextl != '-' and nextl != w[k]:
-                        clean = False
+                clean = is_path_clear(w, x, y, 1, -1)
+
                 if clean:
                     for k in range(length):
                         list[y - k][x + k] = w[k]
@@ -174,10 +155,8 @@ for w in words:
             if outof_bounds(endx, m, 0) or outof_bounds(endy, n, 0):
                 continue
             else:
-                for k in range(length):
-                    nextl = list[y + k][x + k]
-                    if nextl != '-' and nextl != w[k]:
-                        clean = False
+                clean = is_path_clear(w, x, y, 1, 1)
+
                 if clean:
                     for k in range(length):
                         list[y + k][x + k] = w[k]
@@ -191,10 +170,7 @@ for w in words:
             if outof_bounds(endx, 0, 1) or outof_bounds(endy, n, 0):
                 continue
             else:
-                for k in range(length):
-                    nextl = list[y + k][x - k]
-                    if nextl != '-' and nextl != w[k]:
-                        clean = False
+                clean = is_path_clear(w, x, y, -1, 1)
                 if clean:
                     for k in range(length):
                         list[y + k][x - k] = w[k]
