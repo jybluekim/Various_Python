@@ -17,6 +17,14 @@ def outof_bounds(val, ref, pol):
             return False
 
 
+def is_path_clear(word, x, y, dir):
+    for k in range(len(word)):
+        nextl = list[y][x - k]
+        # print ("Next: ", nextl)
+        if nextl != '-' and nextl != w[k]:
+            return False
+    return True
+
 # m is col width
 # n is row count
 n = 8
@@ -57,12 +65,10 @@ for w in words:
         dir = random.randint(0,7)
         #print ("dir: ", dir)
         if dir == 0:
-#            endx = x - length
-#            if endx < 0:
-#                continue
             if outof_bounds(x-length, 0, 1) == True:
                 continue
             else:
+
                 for k in range(length):
                     nextl = list[y][x-k]
                     #print ("Next: ", nextl)
@@ -74,9 +80,6 @@ for w in words:
                         list[y][x-k] = w[k]
                     loop = False
         elif dir == 1:
-            #endy = y - length
-            #if endy < 0:
-            #    continue
             if outof_bounds(y-length, 0, 1) == True:
                 continue
             else:
