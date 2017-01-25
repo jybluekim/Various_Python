@@ -10,7 +10,7 @@ import random
 
 bigl = [i for i in range(2,30)]
 l = random.sample(bigl, NUM_INT)
-
+#l = [2, 4, 5, 6, 13]
 
 def is_prime(n):
     if n == 1:
@@ -52,7 +52,7 @@ def prime_fact(n):
 total = 0
 noint = 0
 for i in range(len(l) - 1):
-    for j in range(i, len(l) ):
+    for j in range(i+1, len(l) ):
         print ("i, j = ", l[i], l[j])
         total += 1
 
@@ -71,9 +71,10 @@ for i in range(len(l) - 1):
         intersection = s1 & s2
         if len(intersection) != 0:
             print ("\nIntersection: ", intersection)
-            noint += 1
+
         else:
             print ("No intersection")
+            noint += 1
 
 print ("List is: ", l)
 print ("Total, Noint = ", total, noint)

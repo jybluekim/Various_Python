@@ -3,7 +3,7 @@
 # input: list of candidates and list of results
 def ausvoting(result_list):
 
-    DBG  =  0
+    DBG  =  1
     # check if we have a clear winner - just count #1 and see if it is 50% or higher
     #   If not... need to eliminate bottom vote getters. Identify them first
     #       then re-count while ignoring the bottom vote getters
@@ -59,7 +59,7 @@ def ausvoting(result_list):
                     print ("There is a 50:50 tie between these two: ", maxlist)
             else:
                 if DBG:
-                    print ("Winner is: ", maxind)
+                    #print ("Winner is: ", maxind)
                     print ("Total cand: ", num_cand, ", eliminated cand: ", len(minlist) - 1, "votes earned: ", counter[maxlist[0]])
             return maxlist, iter
         else: # no clear winner
@@ -76,10 +76,10 @@ if __name__ == "__main__":
 
     import random
 
-    num_cand = 10
-    num_voters = 10000
+    num_cand = 5
+    num_voters = 10
 
-    for x in range (10):
+    for x in range (1):
 
         list = []
         for i in range(num_voters):

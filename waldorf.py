@@ -2,7 +2,7 @@ import random
 
 #words = ["luna", "shadow", "alexis", "andrew", "phantom", "forces", "lawn", "dog", "cat" ]
 
-NUM_WORDS = 8
+NUM_WORDS = 6
 MIN_WORD_SIZE = 5
 MAX_WORD_SIZE = 7
 

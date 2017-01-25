@@ -86,9 +86,9 @@ def print_numstring(instr, s):
 
 if __name__ == "__main__":
 
-    print_numstring("0123456789", 1)
-    print_numstring("0123456789", 4)
-
+    #print_numstring("0123456789", 1)
+    #print_numstring("0123456789", 4)
+    print_numstring("6505210577", 10)
 
 
 
